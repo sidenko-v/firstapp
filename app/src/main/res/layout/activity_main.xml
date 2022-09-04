@@ -17,27 +17,27 @@
         tools:srcCompat="@sample/posts_avatars" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@sample/posts.json/data/author"
-        app:layout_constraintBottom_toTopOf="@id/date"
+        app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/imageButton"
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toTopOf="@id/imageView" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:text="@sample/posts.json/data/published"
         app:layout_constraintBottom_toBottomOf="@id/imageView"
         app:layout_constraintStart_toEndOf="@id/imageView"
-        app:layout_constraintTop_toBottomOf="@id/text" />
+        app:layout_constraintTop_toBottomOf="@id/author" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -60,24 +60,24 @@
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <TextView
-        android:id="@+id/postText"
+        android:id="@+id/postContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
         android:layout_marginBottom="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/postText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        android:text="@sample/posts.json/data/postText" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/postText" />
+        app:layout_constraintTop_toBottomOf="@id/postContent" />
 
     <ImageButton
         android:id="@+id/likesButton"
@@ -86,9 +86,8 @@
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="#FFFFFF"
-        app:tint="#80000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     <ImageButton
@@ -100,7 +99,7 @@
         android:background="#FFFFFF"
         app:tint="#80000000"
         app:layout_constraintStart_toEndOf="@id/likes"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
         app:srcCompat="@drawable/ic_baseline_share_24" />
 
     <TextView
@@ -123,7 +122,7 @@
         android:textColor="#80000000"
         app:layout_constraintBottom_toBottomOf="@id/shareButton"
         app:layout_constraintStart_toEndOf="@id/shareButton"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
         app:layout_constraintTop_toTopOf="@id/shareButton" />
 
     <TextView
@@ -135,7 +134,7 @@
         android:textColor="#80000000"
         app:layout_constraintBottom_toBottomOf="@id/imageViews"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
         app:layout_constraintTop_toTopOf="@id/imageViews" />
 
     <ImageView
@@ -145,7 +144,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
         app:layout_constraintEnd_toStartOf="@id/views"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

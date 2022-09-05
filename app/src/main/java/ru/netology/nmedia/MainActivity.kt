@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.post_card_layout.*
 import ru.netology.nmedia.databinding.PostCardLayoutBinding
 import ru.netology.nmedia.dto.PostViewModel
+import androidx.recyclerview.widget.RecyclerView
+import ru.netology.nmedia.dto.PostsAdapter
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +19,16 @@ class MainActivity : AppCompatActivity() {
         //активити у нас знает только про вью модел
         val viewModel: PostViewModel by viewModels()
 
+        val adapter = PostsAdapter {
+            viewModel.likeById(it.id)
+        }
+
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                adapter.list = posts
+            }
+        }
         viewModel.data.observe(this) { post ->
             with(binding) {
                 author.text = post.author

@@ -1,16 +1,9 @@
-package ru.netology.nmedia.dto
+package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
-//репа - это шаблон проектирования, позволяющий взаимодейстсвовать с цем то как с коллекцией обхектов.
-//бизнес логика хранится тут
-
-interface PostRepository {
-    fun getAll(): LiveData<List<Post>>
-    fun likeById(id: Long)
-    fun shareById(id: Long)
-}
+import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.dto.PostRepository
 
 class PostRepositoryInMemoryImpl : PostRepository {
     private var posts = listOf(
@@ -37,15 +30,15 @@ class PostRepositoryInMemoryImpl : PostRepository {
     private val data = MutableLiveData(posts) //объект который подписываетсяя на обновления
 
     override fun getAll(): LiveData<List<Post>> = data
+
     override fun likeById(id: Long) {
         posts = posts.map {
             if (it.id != id) it
             else {
-                it.copy(likedByMe = !it.likedByMe)
-                if (it.likedByMe) {
-                    it.copy(likes = (it.likes.toLong() + 1).toString())
+                if (!it.likedByMe) {
+                    it.copy(likedByMe = !it.likedByMe,likes = (it.likes.toLong() + 1).toString())
                 } else {
-                    it.copy(likes = (it.likes.toLong() - 1).toString())
+                    it.copy(likedByMe = !it.likedByMe,likes = (it.likes.toLong() - 1).toString())
                 }
             }
         }
@@ -53,7 +46,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun shareById(id: Long) {
-
         posts = posts.map {
             if (it.id != id) it
             else {

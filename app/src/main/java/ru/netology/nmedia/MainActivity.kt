@@ -17,18 +17,18 @@ class MainActivity : AppCompatActivity() {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен -> http://netolo.gy/fyb",
             published = "21 мая в 18:37",
             likedByMe = false,
-            "999",
-            "19999",
-            "10000"
+            999,
+            19999,
+            10000
         )
 
         with(binding) {
             author.text = post.author
             published.text = post.published
             postContent.text = post.content
-            likes.text = numToAbbreviatedNumber(post.likes.toLong())
-            shares.text = numToAbbreviatedNumber(post.shares.toLong())
-            views.text = numToAbbreviatedNumber(post.views.toLong())
+            likes.text = numToAbbreviatedNumber(post.likes)
+            shares.text = numToAbbreviatedNumber(post.shares)
+            views.text = numToAbbreviatedNumber(post.views)
             if (post.likedByMe) {
                 likesButton?.setImageResource(R.drawable.ic_baseline_favorite_24)
             }
@@ -43,17 +43,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 )
                 if (post.likedByMe) {
-                    post.likes = (post.likes.toLong() + 1).toString()
-                    likes.text = numToAbbreviatedNumber(post.likes.toLong())
+                    post.likes = (post.likes + 1)
+                    likes.text = numToAbbreviatedNumber(post.likes)
                 } else {
-                    post.likes = (post.likes.toLong() - 1).toString()
-                    likes.text = numToAbbreviatedNumber(post.likes.toLong())
+                    post.likes = (post.likes - 1)
+                    likes.text = numToAbbreviatedNumber(post.likes)
                 }
             }
 
             shareButton?.setOnClickListener {
-                post.shares = (post.shares.toLong() + 1).toString()
-                shares.text = numToAbbreviatedNumber(post.shares.toLong())
+                post.shares = (post.shares + 1)
+                shares.text = numToAbbreviatedNumber(post.shares)
 
             }
 

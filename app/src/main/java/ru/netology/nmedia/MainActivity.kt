@@ -3,14 +3,14 @@ package ru.netology.nmedia
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.post_card_layout.*
+import ru.netology.nmedia.databinding.PostCardLayoutBinding
 import ru.netology.nmedia.dto.PostViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = PostCardLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //активити у нас знает только про вью модел

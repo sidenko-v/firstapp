@@ -13,4 +13,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Widget.AppTheme.LikeCheckBox"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/like_checkbox_tint</item>
+    </style>
+
+    <style name="buttons"
+    parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="backgroundTint">@color/white</item>
+        <item name="iconTint">@color/grey</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
 </resources>

@@ -39,17 +39,17 @@
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/author" />
 
-    <ImageButton
+st    <Button
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttons"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:background="#FFFFFF"
+        app:icon="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24"
-        app:tint="#80000000" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -74,56 +74,44 @@
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="postContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:constraint_referenced_ids="postContent" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppTheme.LikeCheckBox"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:background="#FFFFFF"
+        android:checkable="true"
+        app:icon="@drawable/ic_like_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/postContent"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+        app:layout_constraintTop_toBottomOf="@id/postContent" />
 
-    <ImageButton
+
+    <Button
         android:id="@+id/shareButton"
+        style="@style/buttons"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:background="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@id/likes"
-        app:layout_constraintTop_toBottomOf="@id/postContent"
-        app:srcCompat="@drawable/ic_baseline_share_24"
-        app:tint="#80000000" />
-
-    <TextView
-        android:id="@+id/likes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/likes"
-        android:textColor="#80000000"
+        android:text="@sample/posts.json/data/shares"
+        app:icon="@drawable/ic_baseline_share_24"
         app:layout_constraintBottom_toBottomOf="@id/likesButton"
-        app:layout_constraintStart_toEndOf="@id/likesButton"
+        app:layout_constraintStart_toEndOf="@id/likes"
         app:layout_constraintTop_toTopOf="@id/likesButton" />
 
     <TextView
-        android:id="@+id/shares"
-        android:layout_width="wrap_content"
+        android:id="@+id/likes"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/shares"
-        android:textColor="#80000000"
-        app:layout_constraintBottom_toBottomOf="@id/shareButton"
-        app:layout_constraintStart_toEndOf="@id/shareButton"
-        app:layout_constraintTop_toBottomOf="@id/postContent"
-        app:layout_constraintTop_toTopOf="@id/shareButton" />
+        android:text="@sample/posts.json/data/likes"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@id/likesButton"
+        app:layout_constraintStart_toEndOf="@id/likesButton"
+        app:layout_constraintTop_toTopOf="@id/likesButton" />
 
     <TextView
         android:id="@+id/views"
@@ -132,19 +120,18 @@
         android:layout_marginEnd="@dimen/common_spacing"
         android:text="@sample/posts.json/data/views"
         android:textColor="#80000000"
-        app:layout_constraintBottom_toBottomOf="@id/imageViews"
+        app:layout_constraintBottom_toBottomOf="@id/likesButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/postContent"
-        app:layout_constraintTop_toTopOf="@id/imageViews" />
+        app:layout_constraintTop_toTopOf="@id/likesButton" />
 
     <ImageView
         android:id="@+id/imageViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="@id/likesButton"
         app:layout_constraintEnd_toStartOf="@id/views"
-        app:layout_constraintTop_toBottomOf="@id/postContent"
+        app:layout_constraintTop_toTopOf="@id/likesButton"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

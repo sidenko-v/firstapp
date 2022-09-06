@@ -1,13 +1,13 @@
 package ru.netology.nmedia
 
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: onLikeListener,
-    private val onShareListener: onShareListener
+    private val listener: OnInterasctionListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(post: Post) {
@@ -15,9 +15,9 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             postContent.text = post.content
-            likes.text = numToAbbreviatedNumber(post.likes.toLong())
-            shares.text = numToAbbreviatedNumber(post.shares.toLong())
-            views.text = numToAbbreviatedNumber(post.views.toLong())
+            likes.text = numToAbbreviatedNumber(post.likes)
+            shares.text = numToAbbreviatedNumber(post.shares)
+            views.text = numToAbbreviatedNumber(post.views)
             likesButton.setImageResource(
                 if (post.likedByMe) {
                     R.drawable.ic_baseline_favorite_24
@@ -25,13 +25,33 @@ class PostViewHolder(
                     R.drawable.ic_baseline_favorite_border_24
             )
             likesButton.setOnClickListener {
-                onLikeListener(post)
+                listener.onLike(post)
             }
             shareButton.setOnClickListener {
-                onShareListener(post)
+                listener.onShare(post)
+            }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                listener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                listener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
+
     }
+
 
     fun numToAbbreviatedNumber(number: Long): String {
         var abbNumber = ""
@@ -60,4 +80,5 @@ class PostViewHolder(
             }
         }
         return abbNumber
-    }}
+    }
+}

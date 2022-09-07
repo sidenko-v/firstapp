@@ -1,17 +1,16 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_main.*
+import ru.netology.nmedia.OnInterasctionListener
+import ru.netology.nmedia.PostsAdapter
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,15 +26,31 @@ class MainActivity : AppCompatActivity() {
         //by - это делегирование
         val viewModel: PostViewModel by viewModels()
 
+        val editPostActivityLauncher =
+            registerForActivityResult(EditPostActivity.Contract("123")) { result ->
+                result ?: return@registerForActivityResult
+                viewModel.changeContent(result)
+                viewModel.save()
+            }
+
         //адаптер - класс для предоставления вью посту
         val adapter = PostsAdapter(object : OnInterasctionListener {
+
             override fun onEdit(post: Post) {
+
+                editPostActivityLauncher.launch()
                 viewModel.edit(post)
-                group.visibility = View.VISIBLE
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(shareIntent)
             }
 
             override fun onLike(post: Post) {
@@ -46,8 +61,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.removeById(post.id)
             }
         })
-
-
         //??
         binding.list.adapter = adapter
 
@@ -57,43 +70,17 @@ class MainActivity : AppCompatActivity() {
             adapter.list = posts
         }
 
-        viewModel.edited.observe(this) { post ->
-            if (post.id == 0L) {
-                return@observe
-            }
-            with(binding.content) {
-                requestFocus()
-                setText(post.content)
-                editTextView.setText(post.content)
-            }
-        }
-
-        binding.resetEditButton.setOnClickListener {
-            content.setText("")
-            group.visibility = View.INVISIBLE
+        //функция, которая будет вызвана при завершении NewPostActivity
+        val activityLauncher = registerForActivityResult(NewPostActivity.Contract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
             viewModel.save()
         }
 
-        binding.save.setOnClickListener {
-            with(binding.content) {
-                val text = text?.toString()
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Content can't be empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                viewModel.changeContent(text)
-                viewModel.save()
-                if (group.isVisible) {
-                    group.visibility = View.INVISIBLE
-                }
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-            }
+        //запуск активити при клике по "+" c с возвращением результата
+        binding.add.setOnClickListener()
+        {
+            activityLauncher.launch()
         }
     }
 }

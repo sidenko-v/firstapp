@@ -23,6 +23,7 @@ class PostsAdapter(
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = list[position]
+
         holder.bind(post)
     }
 

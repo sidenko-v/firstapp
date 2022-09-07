@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">NMedia</string>
     <string name="post_text" translatable="false">Это текст нового поста</string>
-
+    <string name="chooser_share_post" translatable="false">Текст для шары</string>
+    <string name="error_empty_content" translatable="false">error_empty_content</string>
+    <string name="add_post">добавить пост</string>
+    <string name="edit_post">редактировать пост</string>
 </resources>

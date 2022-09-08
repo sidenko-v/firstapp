@@ -18,7 +18,7 @@ class EditPostActivity : AppCompatActivity() {
 
         //фокус на поле ввода
         binding.edit.requestFocus()
-        binding.edit.setText(Intent().getStringExtra("content"))
+        binding.edit.setText(intent?.getStringExtra(Intent.EXTRA_TEXT))
 
         //поведение при клике по "+"
         binding.ok.setOnClickListener {
@@ -48,14 +48,10 @@ class EditPostActivity : AppCompatActivity() {
     }
 
     //класс для созданияи интента и обработки возвращаемого результата
-    class Contract(content: String?) : ActivityResultContract<Unit, String?>() {
+    object Contract : ActivityResultContract<String?, String?>() {
 
-        val content = content
-
-        override fun createIntent(context: Context, input: Unit): Intent =
-            Intent(context, EditPostActivity::class.java).apply {
-                putExtra("content", content)
-            }
+        override fun createIntent(context: Context, input: String?): Intent =
+            Intent(context, EditPostActivity::class.java).putExtra(Intent.EXTRA_TEXT, input)
 
 
         override fun parseResult(resultCode: Int, intent: Intent?): String? =

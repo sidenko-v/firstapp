@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:hint="@string/post_text"
+        android:gravity="top"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:padding="@dimen/common_spacing"

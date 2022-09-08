@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import android.content.Intent
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -15,7 +16,7 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             postContent.text = post.content
-            likes.text = numToAbbreviatedNumber(post.likes)
+            likesButton.text = numToAbbreviatedNumber(post.likes)
             shareButton.text = numToAbbreviatedNumber(post.shares)
             views.text = numToAbbreviatedNumber(post.views)
             likesButton.isChecked = post.likedByMe
@@ -29,6 +30,7 @@ class PostViewHolder(
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { item ->
+                        Intent().putExtra("content", post.content)
                         when (item.itemId) {
                             R.id.remove -> {
                                 listener.onRemove(post)

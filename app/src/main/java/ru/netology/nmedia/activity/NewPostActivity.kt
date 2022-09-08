@@ -27,7 +27,7 @@ class NewPostActivity : AppCompatActivity() {
         }
     }
 
-    class Contract : ActivityResultContract<Unit, String?>() {
+    object Contract : ActivityResultContract<Unit, String?>() {
         override fun createIntent(context: Context, input: Unit): Intent =
             Intent(context, NewPostActivity::class.java)
 

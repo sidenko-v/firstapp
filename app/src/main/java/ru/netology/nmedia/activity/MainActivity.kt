@@ -26,20 +26,22 @@ class MainActivity : AppCompatActivity() {
         //by - это делегирование
         val viewModel: PostViewModel by viewModels()
 
-        val editPostActivityLauncher =
-            registerForActivityResult(EditPostActivity.Contract("123")) { result ->
-                result ?: return@registerForActivityResult
-                viewModel.changeContent(result)
-                viewModel.save()
-            }
-
+        val editPostActivityLauncher = registerForActivityResult(
+            EditPostActivity.Contract
+        ) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
         //адаптер - класс для предоставления вью посту
         val adapter = PostsAdapter(object : OnInterasctionListener {
 
+
             override fun onEdit(post: Post) {
 
-                editPostActivityLauncher.launch()
+                editPostActivityLauncher.launch(post.content)
                 viewModel.edit(post)
+
             }
 
             override fun onShare(post: Post) {
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //функция, которая будет вызвана при завершении NewPostActivity
-        val activityLauncher = registerForActivityResult(NewPostActivity.Contract()) { result ->
+        val activityLauncher = registerForActivityResult(NewPostActivity.Contract) { result ->
             result ?: return@registerForActivityResult
             viewModel.changeContent(result)
             viewModel.save()

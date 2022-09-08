@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/author" />
 
-st    <Button
+    <Button
         android:id="@+id/menu"
         style="@style/buttons"
         android:layout_width="40dp"
@@ -66,7 +66,6 @@ st    <Button
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:layout_marginBottom="@dimen/common_spacing"
         android:text="@sample/posts.json/data/postText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,10 +81,11 @@ st    <Button
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likesButton"
         style="@style/Widget.AppTheme.LikeCheckBox"
-        android:layout_width="48dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/common_spacing"
         android:checkable="true"
+        android:text="@sample/posts.json/data/likes"
         app:icon="@drawable/ic_like_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/postContent" />
@@ -99,16 +99,6 @@ st    <Button
         android:layout_marginStart="@dimen/common_spacing"
         android:text="@sample/posts.json/data/shares"
         app:icon="@drawable/ic_baseline_share_24"
-        app:layout_constraintBottom_toBottomOf="@id/likesButton"
-        app:layout_constraintStart_toEndOf="@id/likes"
-        app:layout_constraintTop_toTopOf="@id/likesButton" />
-
-    <TextView
-        android:id="@+id/likes"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:text="@sample/posts.json/data/likes"
-        android:textColor="@color/grey"
         app:layout_constraintBottom_toBottomOf="@id/likesButton"
         app:layout_constraintStart_toEndOf="@id/likesButton"
         app:layout_constraintTop_toTopOf="@id/likesButton" />
